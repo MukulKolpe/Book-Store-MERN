@@ -5,10 +5,13 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import axios from "axios";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddBook = () => {
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     name: "",
     description: "",
@@ -23,10 +26,24 @@ const AddBook = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const sendRequest = async () => {
+    await axios
+      .post("http://localhost:5000/books", {
+        name: String(inputs.name),
+        author: String(inputs.author),
+        description: String(inputs.description),
+        price: Number(inputs.price),
+        image: String(inputs.image),
+        available: Boolean(checked),
+      })
+      .then((res) => res.data);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
+    console.log(inputs, checked);
+    sendRequest().then(() => navigate("/books"));
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <Box

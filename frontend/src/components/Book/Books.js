@@ -10,6 +10,7 @@ const fetchHandler = async () => {
 };
 const Books = () => {
   const [books, setBooks] = useState();
+
   useEffect(() => {
     fetchHandler().then((data) => setBooks(data.books));
   }, []);

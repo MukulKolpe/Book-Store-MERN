@@ -10,7 +10,7 @@ app.use(cors());
 app.use("/books", router);
 mongoose
   .connect(
-    "mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.0d76b.mongodb.net/bookStore?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@cluster0.xtgoofo.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => console.log("Connected to Database"))
   .then(() => {
